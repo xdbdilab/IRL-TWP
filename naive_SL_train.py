@@ -44,10 +44,10 @@ class task_LSTM(nn.Module):
         return out, hidden_info
 
 
-writer = SummaryWriter('runs/lstm_20-20-0813')
+writer = SummaryWriter('runs/lstm_20-20')
 
 
-train_set = TaskDataset('/27T/TE_TWP/state-action_pickle_lstm/', 0, 90000)
+train_set = TaskDataset('/IRL_TWP/state-action_pickle_lstm/', 0, 90000)
 train_loader = DataLoader(train_set, batch_size=BatchSize, shuffle=True, drop_last=True)
 
 net = task_LSTM(InputSize, HiddenSize, NumLayers, NumClasses).to(device)
@@ -89,6 +89,6 @@ for epoch in range(100):
                   (epoch + 1, i + 1, running_loss / 100))
             writer.add_scalar('train_loss', running_loss / 100, i + iterations_per_epoch * epoch)
             running_loss = 0.0
-            torch.save(net.state_dict(), 'lstm_alibaba_0813')
+            torch.save(net.state_dict(), 'lstm_alibaba')
 
 writer.close()

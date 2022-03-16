@@ -42,7 +42,7 @@ machine_meta_path = 'machine_meta.tar.gz'
 machine_meta = pd.read_csv(machine_meta_path, compression='gzip', header=None,
         names=['machine_id', 'time_stamp', 'failure_domain_1', 'failure_domain_2', 'cpu_num', 'mem_size', 'status'])
 machine_used_array = []
-task_usage_model = pickle.load(open('task_usage_model_0723-128-39.p', 'rb'))
+task_usage_model = pickle.load(open('task_usage_model_0723.p', 'rb'))
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 if torch.cuda.is_available():
     torch.cuda.set_device(2)
@@ -225,7 +225,7 @@ while file_num < sample_num:
         # total_state = time_recorded * (machine_state_length, task_state_length, machine_usage_length)
         # total_traj = total_state + action(2)
     expert_traj = np.array(expert_traj)
-    traj_path = '/27T/data/traj_500_test/' + str(file_num) + '_pkl'
+    traj_path = 'data/traj_500_test/' + str(file_num) + '_pkl'
     with open(traj_path, 'wb') as f:
         pickle.dump(expert_traj, f)
     print(file_num)
